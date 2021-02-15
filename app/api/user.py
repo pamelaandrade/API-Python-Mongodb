@@ -140,9 +140,8 @@ class UpdateUserName(Resource):
         password = postedData["password"] 
         newusername = postedData["newusername"]   
 
-        retJson, error = verifyCredentialsEmail(email, password)
-        if error:
-            return jsonify(retJson)
+        if not UserExistEmail(email):
+            return generateReturnDictionary(304, "Invalid email")
         else: 
             usersbooks.update({
                 "email": email
@@ -151,5 +150,24 @@ class UpdateUserName(Resource):
                     "username": newusername,
                 }
             })
-            
-        return generateReturnDictionary(202, "Username updated with successfully")
+            return generateReturnDictionary(202, "Username updated with successfully")
+
+class UpdateUserEmail(Resource):
+    def post(self):
+        postedData = request.get_json()
+
+        newemail = postedData["newemail"]
+        password = postedData["password"] 
+        username = postedData["username"]   
+
+        if not UserExist(username):
+            return generateReturnDictionary(301, "Invalid Username")
+        else: 
+            usersbooks.update({
+                "username": username
+            },{
+                "$set":{
+                    "email": newemail,
+                }
+            })
+            return generateReturnDictionary(202, "Email updated with successfully")

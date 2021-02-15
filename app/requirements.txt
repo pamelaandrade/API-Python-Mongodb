@@ -2,9 +2,6 @@ Flask
 flask_restful
 flask_restplus
 flask_pymongo
-flask-mongoengine
-Flask-JWT-Extended
 Flask-Bcrypt
 bcrypt
-mongoengine
 pymongo

@@ -1,8 +1,6 @@
 from flask import Flask, app
 from flask_restful import Api
 from pymongo import MongoClient
-from flask_mongoengine import MongoEngine
-from flask_jwt_extended import JWTManager
 
 from api.routes import create_routes
 
